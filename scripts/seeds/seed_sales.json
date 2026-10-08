@@ -1,7 +1,7 @@
 [
   {
     "id": "invest-si",
-    "domain": "Invest.si",
+    "domain": "invest.si",
     "price": 11000,
     "date": "2023-11-12",
     "venue": "Private",
@@ -10,7 +10,7 @@
   },
   {
     "id": "mama-si",
-    "domain": "Mama.si",
+    "domain": "mama.si",
     "price": 2700,
     "date": "2023-09-08",
     "venue": "Sedo",
@@ -19,7 +19,7 @@
   },
   {
     "id": "kmetija-si",
-    "domain": "Kmetija.si",
+    "domain": "kmetija.si",
     "price": 3100,
     "date": "2023-07-15",
     "venue": "Dan.com",
@@ -28,7 +28,7 @@
   },
   {
     "id": "terme-si",
-    "domain": "Terme.si",
+    "domain": "terme.si",
     "price": 4600,
     "date": "2023-05-20",
     "venue": "Sedo",
@@ -37,7 +37,7 @@
   },
   {
     "id": "pes-si",
-    "domain": "Pes.si",
+    "domain": "pes.si",
     "price": 900,
     "date": "2023-03-30",
     "venue": "GoDaddy",
@@ -46,7 +46,7 @@
   },
   {
     "id": "taksi-si",
-    "domain": "Taksi.si",
+    "domain": "taksi.si",
     "price": 2400,
     "date": "2022-12-01",
     "venue": "Private",

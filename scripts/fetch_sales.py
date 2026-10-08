@@ -90,6 +90,12 @@ PRICE_ALT_RE = re.compile(
     r"|(£[\d,]{3,}(?:\.\d+)?)",      # bare pound
 )
 
+# DNJournal rows like "HeroCare.com £20,000 = $26,200" carry the original
+# currency BEFORE the USD conversion. Positional pairing would grab the £
+# token first and apply our fallback rate, shadowing the authoritative "= $Y".
+# Rewriting these to a bare "$Y" before price matching fixes that.
+CONVERTED_PRICE_RE = re.compile(r"[€£][\d,]{3,}(?:\.\d+)?\s*=\s*(\$[\d,]{3,}(?:\.\d+)?)")
+
 ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 URL_DATE_RE = re.compile(r"domainsales/(\d{4})/(\d{8}|\d{4})\.htm", re.I)
 
@@ -264,6 +270,7 @@ def parse_dnj_rows(html: str, date_iso: str) -> List[Dict[str, Any]]:
     """
     records: List[Dict[str, Any]] = []
     for text in extract_rows(html):
+        text = CONVERTED_PRICE_RE.sub(r"\1", text)
         price_matches = list(PRICE_ALT_RE.finditer(text))
         if not price_matches:
             continue
