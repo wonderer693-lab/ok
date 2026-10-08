@@ -43,6 +43,7 @@ from datetime import datetime, timedelta
 from html import unescape
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
+from urllib.parse import urljoin
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_FILE = ROOT / "src" / "data" / "sales.json"
@@ -62,6 +63,12 @@ except ImportError:
 DNJ_CURRENT_PAGE = "https://www.dnjournal.com/domainsales.htm"
 DNJ_ARCHIVE_INDEX = "https://www.dnjournal.com/archive/domainsales-archive.htm"
 
+# dnscroll.com republishes the daily NameBio top-sales list (robots.txt allows
+# crawling /daily-sales/; it only disallows account/admin areas).
+DNSCROLL_INDEX = "https://www.dnscroll.com/daily-sales/"
+DNSCROLL_REPORT_RE = re.compile(r'href="(/daily-sales/daily-market-report-for-[^"]+)"', re.I)
+DNSCROLL_MAX_REPORTS = 6
+
 USER_AGENT = "LiveSellSI-Bot/1.0 (+https://livesellsi.com; .si domain sales data pipeline)"
 HTTP_TIMEOUT = 25
 
@@ -77,6 +84,7 @@ DOMAIN_RE = re.compile(r"\b([a-z0-9][a-z0-9-]{0,62})\.si(?![a-z0-9-])", re.I)
 DOMAIN_FULL_RE = re.compile(r"^([a-z0-9][a-z0-9-]{0,62})\.si$", re.I)
 
 ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.I | re.S)
+CELL_RE = re.compile(r"<t[dh][^>]*>(.*?)</t[dh]>", re.I | re.S)
 TAG_RE = re.compile(r"<[^>]+>")
 DNJ_HREF_RE = re.compile(r'href="([^"]*domainsales/\d{4}/\d{4,8}\.htm)"', re.I)
 YEAR_INDEX_RE = re.compile(r'href="([^"]*domainsales-archive-\d{4}\.htm)"', re.I)
@@ -123,19 +131,38 @@ VENUES = [
     "DomainMarket",
     "DomainLore.uk",
     "LegalBrandMarketing",
+    "Foresight.Domains",
     "TopDomains",
     "DomainName.com",
     "Spaceship",
     "Namecheap",
     "Afternic",
     "GoDaddy",
+    "Dynadot",
     "Dan.com",
     "Flippa",
     "Atom.com",
     "Uniregistry",
+    "Nameshift",
+    "fruits.co",
     "Buy.name",
     "Sedo",
 ]
+
+# dnscroll venue spellings -> canonical labels used across the dataset
+DNSCROLL_VENUE_MAP = {
+    "sedo marketplace": "Sedo",
+    "sedo": "Sedo",
+    "spaceship.com": "Spaceship",
+    "spaceship": "Spaceship",
+    "atom.com": "Atom.com",
+    "dynadot": "Dynadot",
+    "fruits.co": "Fruits.co",
+    "nameshift": "Nameshift",
+    "nameshift.com": "Nameshift",
+    "afternic": "Afternic",
+    "godaddy": "GoDaddy",
+}
 
 # Keyword -> category heuristics (checked in order, lowercase label).
 CATEGORY_RULES: List[tuple] = [
@@ -362,6 +389,87 @@ def scrape_dnjournal(max_weeks: int, skip: int = 0) -> List[Dict[str, Any]]:
     return records
 
 
+def parse_long_date(text: str) -> Optional[str]:
+    """Parse 'October 7, 2026' / 'Oct. 7, 2026' into an ISO date."""
+    match = re.search(rf"({_MONTH})\s+(\d{{1,2}}),\s+(\d{{4}})", text, re.I)
+    if not match:
+        return None
+    try:
+        parsed = datetime.strptime(
+            f"{normalize_month(match.group(1))} {int(match.group(2))} {match.group(3)}",
+            "%B %d %Y",
+        )
+    except ValueError:
+        return None
+    return parsed.strftime("%Y-%m-%d")
+
+
+def normalize_dnscroll_venue(raw: str) -> str:
+    key = raw.strip().lower()
+    return DNSCROLL_VENUE_MAP.get(key, raw.strip()[:40] or "Private")
+
+
+def parse_dnscroll_rows(html: str) -> List[Dict[str, Any]]:
+    """Extract .si rows from a dnscroll daily report table.
+
+    Columns are positional: rank, domain, price ("27,045 USD"), venue,
+    report date ("October 7, 2026"). Rows are matched relative to the
+    domain cell so subtle layout changes do not shift the pairing.
+    """
+    records: List[Dict[str, Any]] = []
+    for row_html in ROW_RE.findall(html):
+        cells = [clean_text(cell) for cell in CELL_RE.findall(row_html)]
+        for index, cell in enumerate(cells):
+            match = re.fullmatch(r"([a-z0-9][a-z0-9-]*)\.si", cell.lower())
+            if not match:
+                continue
+            if index + 3 >= len(cells):
+                break
+            price_match = re.search(r"([\d,]{3,})\s*USD", cells[index + 1], re.I)
+            date_iso = parse_long_date(cells[index + 3])
+            if not price_match or not date_iso:
+                break
+            price = money_to_int(price_match.group(1))
+            if not price:
+                break
+            records.append(
+                {
+                    "domain": f"{match.group(1)}.si",
+                    "price": price,
+                    "date": date_iso,
+                    "venue": normalize_dnscroll_venue(cells[index + 2]),
+                }
+            )
+            break
+    return records
+
+
+def scrape_dnscroll(max_weeks: int = 0, skip: int = 0) -> List[Dict[str, Any]]:
+    """Fetch recent dnscroll daily market reports (NameBio-derived, public)
+    and return raw .si sale records. Each report lists the day's top sales,
+    so only .si sales that chart globally are captured - a best-effort
+    complement to DNJournal's biweekly charts."""
+    records: List[Dict[str, Any]] = []
+    index_html = fetch_text(DNSCROLL_INDEX)
+    if not index_html:
+        return records
+    report_paths: List[str] = []
+    for href in DNSCROLL_REPORT_RE.findall(index_html):
+        if href not in report_paths:
+            report_paths.append(href)
+        if len(report_paths) >= DNSCROLL_MAX_REPORTS:
+            break
+    for href in report_paths:
+        url = urljoin(DNSCROLL_INDEX, href)
+        report_html = fetch_text(url)
+        if not report_html:
+            continue
+        rows = parse_dnscroll_rows(report_html)
+        logging.info("%s: %s .si row(s) found", url, len(rows))
+        records.extend(rows)
+    return records
+
+
 # --- Source registry ----------------------------------------------------------
 #
 # Each source is a callable taking (max_weeks, skip) and returning RAW record
@@ -370,6 +478,7 @@ def scrape_dnjournal(max_weeks: int, skip: int = 0) -> List[Dict[str, Any]]:
 # aborts the pipeline - the failure is logged and the remaining sources run.
 
 SOURCES: Dict[str, Callable[[int, int], List[Dict[str, Any]]]] = {
+    "dnscroll": scrape_dnscroll,
     "dnjournal": scrape_dnjournal,
 }
 

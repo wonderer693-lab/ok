@@ -1,5 +1,140 @@
 [
   {
+    "id": "pure-si",
+    "domain": "pure.si",
+    "price": 27045,
+    "date": "2026-10-07",
+    "venue": "Fruits.co",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "yn-si",
+    "domain": "yn.si",
+    "price": 6837,
+    "date": "2026-10-07",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "xh-si",
+    "domain": "xh.si",
+    "price": 6438,
+    "date": "2026-10-07",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "truenorth-si",
+    "domain": "truenorth.si",
+    "price": 10000,
+    "date": "2026-10-06",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "binance-si",
+    "domain": "binance.si",
+    "price": 9723,
+    "date": "2026-10-06",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "rev-si",
+    "domain": "rev.si",
+    "price": 8604,
+    "date": "2026-10-06",
+    "venue": "Fruits.co",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "gambling-si",
+    "domain": "gambling.si",
+    "price": 7202,
+    "date": "2026-10-06",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "economy-si",
+    "domain": "economy.si",
+    "price": 6302,
+    "date": "2026-10-06",
+    "venue": "Sedo",
+    "category": "Finance & Crypto",
+    "length": 7
+  },
+  {
+    "id": "hollywood-si",
+    "domain": "hollywood.si",
+    "price": 30000,
+    "date": "2026-10-05",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "betty-si",
+    "domain": "betty.si",
+    "price": 17500,
+    "date": "2026-10-05",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "ridge-si",
+    "domain": "ridge.si",
+    "price": 14870,
+    "date": "2026-10-05",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "humanizer-si",
+    "domain": "humanizer.si",
+    "price": 10000,
+    "date": "2026-10-05",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "parallax-si",
+    "domain": "parallax.si",
+    "price": 8688,
+    "date": "2026-10-05",
+    "venue": "Fruits.co",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "x402-si",
+    "domain": "x402.si",
+    "price": 7999,
+    "date": "2026-10-05",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "travelagent-si",
+    "domain": "travelagent.si",
+    "price": 19988,
+    "date": "2026-10-04",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 11
+  },
+  {
     "id": "ex-si",
     "domain": "ex.si",
     "price": 12000,
@@ -27,27 +162,9 @@
     "length": 6
   },
   {
-    "id": "gambling-si",
-    "domain": "gambling.si",
-    "price": 7168,
-    "date": "2026-10-04",
-    "venue": "Private",
-    "category": "Keyword",
-    "length": 8
-  },
-  {
     "id": "betting-si",
     "domain": "betting.si",
     "price": 6720,
-    "date": "2026-10-04",
-    "venue": "Private",
-    "category": "Keyword",
-    "length": 7
-  },
-  {
-    "id": "economy-si",
-    "domain": "economy.si",
-    "price": 6272,
     "date": "2026-10-04",
     "venue": "Private",
     "category": "Keyword",
@@ -61,6 +178,15 @@
     "venue": "Private",
     "category": "Finance & Crypto",
     "length": 7
+  },
+  {
+    "id": "rate-si",
+    "domain": "rate.si",
+    "price": 5750,
+    "date": "2026-10-04",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 4
   },
   {
     "id": "books-si",
@@ -189,15 +315,6 @@
     "length": 8
   },
   {
-    "id": "horse-si",
-    "domain": "horse.si",
-    "price": 3999,
-    "date": "2026-10-04",
-    "venue": "Private",
-    "category": "Keyword",
-    "length": 5
-  },
-  {
     "id": "hive-si",
     "domain": "hive.si",
     "price": 3988,
@@ -250,6 +367,60 @@
     "venue": "Private",
     "category": "Short Brandable",
     "length": 2
+  },
+  {
+    "id": "haute-si",
+    "domain": "haute.si",
+    "price": 4999,
+    "date": "2026-10-03",
+    "venue": "Brandder.com",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "caspian-si",
+    "domain": "caspian.si",
+    "price": 19795,
+    "date": "2026-10-02",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "higgsfield-si",
+    "domain": "higgsfield.si",
+    "price": 14926,
+    "date": "2026-10-02",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 10
+  },
+  {
+    "id": "wealth-si",
+    "domain": "wealth.si",
+    "price": 5423,
+    "date": "2026-10-02",
+    "venue": "Nameshift",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "journey-si",
+    "domain": "journey.si",
+    "price": 4888,
+    "date": "2026-10-02",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "horse-si",
+    "domain": "horse.si",
+    "price": 3999,
+    "date": "2026-10-02",
+    "venue": "Foresight.Domains",
+    "category": "Keyword",
+    "length": 5
   },
   {
     "id": "go-si",
