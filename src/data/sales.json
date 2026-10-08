@@ -279,6 +279,15 @@
     "length": 4
   },
   {
+    "id": "micro-si",
+    "domain": "micro.si",
+    "price": 2800,
+    "date": "2026-07-05",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
     "id": "nepremicnine-si",
     "domain": "nepremicnine.si",
     "price": 6500,
@@ -306,6 +315,123 @@
     "length": 3
   },
   {
+    "id": "name-si",
+    "domain": "name.si",
+    "price": 2260,
+    "date": "2026-06-21",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "sports-si",
+    "domain": "sports.si",
+    "price": 8625,
+    "date": "2026-06-07",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "stock-si",
+    "domain": "stock.si",
+    "price": 3738,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "new-si",
+    "domain": "new.si",
+    "price": 3680,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "byte-si",
+    "domain": "byte.si",
+    "price": 3450,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "security-si",
+    "domain": "security.si",
+    "price": 3449,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "house-si",
+    "domain": "house.si",
+    "price": 3220,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "uni-si",
+    "domain": "uni.si",
+    "price": 2875,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "great-si",
+    "domain": "great.si",
+    "price": 2760,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "homes-si",
+    "domain": "homes.si",
+    "price": 2760,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "investing-si",
+    "domain": "investing.si",
+    "price": 2760,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Finance & Crypto",
+    "length": 9
+  },
+  {
+    "id": "tiger-si",
+    "domain": "tiger.si",
+    "price": 2760,
+    "date": "2026-06-07",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "key-si",
+    "domain": "key.si",
+    "price": 1392,
+    "date": "2026-05-24",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
     "id": "kripto-si",
     "domain": "kripto.si",
     "price": 8800,
@@ -322,6 +448,15 @@
     "venue": "Sedo",
     "category": "Food & Drink",
     "length": 4
+  },
+  {
+    "id": "onchain-si",
+    "domain": "onchain.si",
+    "price": 3500,
+    "date": "2026-03-01",
+    "venue": "Private",
+    "category": "AI Data",
+    "length": 7
   },
   {
     "id": "igre-si",
@@ -378,6 +513,15 @@
     "length": 4
   },
   {
+    "id": "bcgame-si",
+    "domain": "bcgame.si",
+    "price": 11115,
+    "date": "2025-08-10",
+    "venue": "Sedo",
+    "category": "Gaming",
+    "length": 6
+  },
+  {
     "id": "recepti-si",
     "domain": "recepti.si",
     "price": 3600,
@@ -396,6 +540,15 @@
     "length": 8
   },
   {
+    "id": "sentient-si",
+    "domain": "sentient.si",
+    "price": 2195,
+    "date": "2025-05-25",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
     "id": "kolesa-si",
     "domain": "kolesa.si",
     "price": 5900,
@@ -403,6 +556,15 @@
     "venue": "Sedo",
     "category": "Automotive",
     "length": 6
+  },
+  {
+    "id": "artificial-si",
+    "domain": "artificial.si",
+    "price": 4999,
+    "date": "2025-05-11",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 10
   },
   {
     "id": "hrana-si",
@@ -475,6 +637,24 @@
     "venue": "Dan.com",
     "category": "Food & Drink",
     "length": 4
+  },
+  {
+    "id": "agent-si",
+    "domain": "agent.si",
+    "price": 3050,
+    "date": "2024-07-07",
+    "venue": "DomainLore.uk",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "betano-si",
+    "domain": "betano.si",
+    "price": 2675,
+    "date": "2024-06-23",
+    "venue": "DomainMarket",
+    "category": "Keyword",
+    "length": 6
   },
   {
     "id": "cloud-si",
@@ -574,5 +754,230 @@
     "venue": "Private",
     "category": "Travel",
     "length": 5
+  },
+  {
+    "id": "makeup-si",
+    "domain": "makeup.si",
+    "price": 3360,
+    "date": "2019-12-15",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "khs-si",
+    "domain": "khs.si",
+    "price": 2250,
+    "date": "2018-04-29",
+    "venue": "DomainMarket",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "coach-si",
+    "domain": "coach.si",
+    "price": 1250,
+    "date": "2018-04-22",
+    "venue": "Afternic",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "hr-si",
+    "domain": "hr.si",
+    "price": 1000,
+    "date": "2018-04-22",
+    "venue": "Afternic",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "nekretnine-si",
+    "domain": "nekretnine.si",
+    "price": 2800,
+    "date": "2018-03-18",
+    "venue": "LegalBrandMarketing",
+    "category": "Keyword",
+    "length": 10
+  },
+  {
+    "id": "it-si",
+    "domain": "it.si",
+    "price": 3000,
+    "date": "2016-07-24",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "jackpot-si",
+    "domain": "jackpot.si",
+    "price": 3948,
+    "date": "2016-04-17",
+    "venue": "Flippa",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "torrentus-si",
+    "domain": "torrentus.si",
+    "price": 1149,
+    "date": "2015-08-23",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "greentube-si",
+    "domain": "greentube.si",
+    "price": 1272,
+    "date": "2015-03-08",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "ds-si",
+    "domain": "ds.si",
+    "price": 1000,
+    "date": "2015-02-08",
+    "venue": "Afternic",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "ipsen-si",
+    "domain": "ipsen.si",
+    "price": 1000,
+    "date": "2014-09-28",
+    "venue": "Flippa",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "goodgame-si",
+    "domain": "goodgame.si",
+    "price": 2239,
+    "date": "2014-06-08",
+    "venue": "DomainMarket",
+    "category": "Gaming",
+    "length": 8
+  },
+  {
+    "id": "su-si",
+    "domain": "su.si",
+    "price": 1000,
+    "date": "2014-05-11",
+    "venue": "Afternic",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "parmalat-si",
+    "domain": "parmalat.si",
+    "price": 1104,
+    "date": "2014-04-13",
+    "venue": "Afternic",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "shell-si",
+    "domain": "shell.si",
+    "price": 3000,
+    "date": "2013-10-06",
+    "venue": "Afternic",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "square-si",
+    "domain": "square.si",
+    "price": 17000,
+    "date": "2013-08-04",
+    "venue": "Afternic",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "770-si",
+    "domain": "770.si",
+    "price": 2000,
+    "date": "2013-06-02",
+    "venue": "DomainMarket",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "sa-si",
+    "domain": "sa.si",
+    "price": 1990,
+    "date": "2013-03-24",
+    "venue": "Afternic",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "stargames-si",
+    "domain": "stargames.si",
+    "price": 3250,
+    "date": "2013-03-10",
+    "venue": "Afternic",
+    "category": "Gaming",
+    "length": 9
+  },
+  {
+    "id": "wi-si",
+    "domain": "wi.si",
+    "price": 2000,
+    "date": "2013-01-20",
+    "venue": "Afternic",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "vv-si",
+    "domain": "vv.si",
+    "price": 1290,
+    "date": "2012-09-23",
+    "venue": "Afternic",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "franchise-si",
+    "domain": "franchise.si",
+    "price": 2500,
+    "date": "2012-06-03",
+    "venue": "Afternic",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "xnxx-si",
+    "domain": "xnxx.si",
+    "price": 4320,
+    "date": "2012-02-26",
+    "venue": "Afternic",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "ye-si",
+    "domain": "ye.si",
+    "price": 1250,
+    "date": "2011-05-15",
+    "venue": "DomainName.com",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "reisen-si",
+    "domain": "reisen.si",
+    "price": 2572,
+    "date": "2010-09-05",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 6
   }
 ]

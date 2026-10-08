@@ -39,7 +39,7 @@ import re
 import sys
 import urllib.error
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 from html import unescape
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
@@ -78,7 +78,8 @@ DOMAIN_FULL_RE = re.compile(r"^([a-z0-9][a-z0-9-]{0,62})\.si$", re.I)
 
 ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.I | re.S)
 TAG_RE = re.compile(r"<[^>]+>")
-DNJ_HREF_RE = re.compile(r'href="([^"]*domainsales/\d{4}/\d{4}\.htm)"', re.I)
+DNJ_HREF_RE = re.compile(r'href="([^"]*domainsales/\d{4}/\d{4,8}\.htm)"', re.I)
+YEAR_INDEX_RE = re.compile(r'href="([^"]*domainsales-archive-\d{4}\.htm)"', re.I)
 
 # One matcher for every price representation, with positions preserved so a
 # domain can be paired with the price that follows it in the same row.
@@ -90,6 +91,7 @@ PRICE_ALT_RE = re.compile(
 )
 
 ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+URL_DATE_RE = re.compile(r"domainsales/(\d{4})/(\d{8}|\d{4})\.htm", re.I)
 
 _DAY = r"(?:Sun|Mon|Tue|Wed|Thu|Fri|Sat)(?:day)?\.?,?\s+"
 _MONTH = (
@@ -99,6 +101,10 @@ _MONTH = (
 )
 PERIOD_END_RE = re.compile(rf"{_DAY}({_MONTH})\s+(\d{{1,2}}),\s+(\d{{4}})", re.I)
 ENDING_RE = re.compile(rf"ending\s+{_DAY}({_MONTH})\s+(\d{{1,2}}),\s+(\d{{4}})", re.I)
+CAPTION_END_RE = re.compile(
+    rf"{_DAY}{_MONTH}\s+\d{{1,2}},\s+\d{{4}}\s*[-–—]+\s*{_DAY}({_MONTH})\s+(\d{{1,2}}),\s+(\d{{4}})",
+    re.I,
+)
 
 _MONTH_ABBR = {
     "jan": "January", "feb": "February", "mar": "March", "apr": "April",
@@ -199,10 +205,33 @@ def normalize_month(name: str) -> str:
     return _MONTH_ABBR.get(key, name)
 
 
-def parse_period_end(html: str) -> Optional[str]:
-    """Return the reporting-period end date of a DNJournal page as ISO date."""
+def parse_issue_date(page_url: str) -> Optional[datetime]:
+    """Extract the issue date from a DNJournal chart URL (2026/0204.htm or
+    2009/20090729.htm). Returns None when the URL carries no date."""
+    match = URL_DATE_RE.search(page_url or "")
+    if not match:
+        return None
+    year, token = match.group(1), match.group(2)
+    if len(token) == 8:
+        year, token = token[:4], token[4:]
+    try:
+        return datetime(int(year), int(token[:2]), int(token[2:4]))
+    except ValueError:
+        return None
+
+
+def parse_period_end(html: str, page_url: str = "") -> Optional[str]:
+    """Return the reporting-period end date of a DNJournal page as ISO date.
+
+    Tries in order: chart caption date range ("Mon. Jan 5 - Sun. Jan 18, 2026"),
+    prose "ending Sunday, ..." sentence, then the last bare date on the page.
+    DNJournal occasionally typo's the year in its prose (e.g. "January 18, 2025"
+    on a 2026 issue); when the page URL carries an issue date, results further
+    than 45 days before the issue are treated as typos and corrected to
+    issue-date minus 15 days (the typical publication lag).
+    """
     text = clean_text(html)
-    match = ENDING_RE.search(text)
+    match = CAPTION_END_RE.search(text) or ENDING_RE.search(text)
     if match:
         month, day, year = match.group(1), match.group(2), match.group(3)
     else:
@@ -214,6 +243,15 @@ def parse_period_end(html: str) -> Optional[str]:
         parsed = datetime.strptime(f"{normalize_month(month)} {int(day)} {year}", "%B %d %Y")
     except ValueError:
         return None
+
+    issue_date = parse_issue_date(page_url)
+    if issue_date:
+        delta = (issue_date - parsed).days
+        if delta < 0 or delta > 45:
+            corrected = issue_date - timedelta(days=15)
+            logging.info("Correcting implausible period end %s -> %s for %s",
+                         parsed.strftime("%Y-%m-%d"), corrected.strftime("%Y-%m-%d"), page_url)
+            parsed = corrected
     return parsed.strftime("%Y-%m-%d")
 
 
@@ -250,33 +288,64 @@ def parse_dnj_rows(html: str, date_iso: str) -> List[Dict[str, Any]]:
     return records
 
 
-def discover_dnj_pages(max_weeks: int) -> List[str]:
+def _abs_url(href: str) -> str:
+    if href.startswith("http"):
+        return href
+    if href.startswith("/"):
+        return f"https://www.dnjournal.com{href}"
+    return f"https://www.dnjournal.com/archive/{href}"
+
+
+def discover_dnj_pages(max_weeks: int, skip: int = 0) -> List[str]:
     """List DNJournal chart pages to parse, oldest first, current page last.
 
-    Oldest-first processing means each domain keeps the date of its earliest
-    reporting, which is closest to the actual sale date.
+    Follows the main archive index AND the per-year index pages (2023, 2024,
+    2025, ...) so the whole public archive is reachable. Oldest-first
+    processing means each domain keeps the date of its earliest reporting,
+    which is closest to the actual sale date.
+
+    `max_weeks` caps the selection to the newest N archive pages. `skip`
+    drops the newest `skip` archive pages BEFORE that cap, which enables
+    chunked historical backfills (e.g. skip=0 for the newest slice, then
+    skip=N to walk further back).
     """
     pages: List[str] = []
     index_html = fetch_text(DNJ_ARCHIVE_INDEX)
     if index_html:
-        hrefs = sorted(set(DNJ_HREF_RE.findall(index_html)))
-        for href in hrefs:
-            url = href if href.startswith("http") else f"https://www.dnjournal.com/archive/{href}"
-            pages.append(url)
+        for href in sorted(set(DNJ_HREF_RE.findall(index_html))):
+            pages.append(_abs_url(href))
+        # Per-year index pages cover the older archive. Fetch them newest-first
+        # and stop once we have a comfortable buffer, so short cron runs never
+        # crawl 20+ index pages they don't need. When `skip` is used (chunked
+        # backfills) the whole year index must be read to keep slice math exact.
+        target = float("inf") if skip > 0 else max(1, max_weeks) * 2
+        for year_href in sorted(set(YEAR_INDEX_RE.findall(index_html)), reverse=True):
+            if len(pages) >= target:
+                break
+            year_html = fetch_text(_abs_url(year_href))
+            if not year_html:
+                continue
+            for href in sorted(set(DNJ_HREF_RE.findall(year_html))):
+                url = _abs_url(href)
+                if url not in pages:
+                    pages.append(url)
+    pages = sorted(set(pages))
+    if skip > 0:
+        pages = pages[:-skip] if skip < len(pages) else []
     if len(pages) > max(1, max_weeks - 1):
         pages = pages[-(max_weeks - 1):]
     pages.append(DNJ_CURRENT_PAGE)
     return pages
 
 
-def scrape_dnjournal(max_weeks: int) -> List[Dict[str, Any]]:
+def scrape_dnjournal(max_weeks: int, skip: int = 0) -> List[Dict[str, Any]]:
     """Fetch DNJournal weekly charts and return raw .si sale records."""
     records: List[Dict[str, Any]] = []
-    for page in discover_dnj_pages(max(1, max_weeks)):
+    for page in discover_dnj_pages(max(1, max_weeks), skip):
         html = fetch_text(page)
         if not html:
             continue
-        date_iso = parse_period_end(html)
+        date_iso = parse_period_end(html, page)
         if not date_iso:
             logging.warning("No reporting period found on %s - skipping page", page)
             continue
@@ -288,12 +357,12 @@ def scrape_dnjournal(max_weeks: int) -> List[Dict[str, Any]]:
 
 # --- Source registry ----------------------------------------------------------
 #
-# Each source is a callable taking `max_weeks` and returning RAW record dicts
-# with keys: domain, price, date, venue. Normalization, dedupe and sorting are
-# handled centrally in main(). A source raising an exception never aborts the
-# pipeline - the failure is logged and the remaining sources still run.
+# Each source is a callable taking (max_weeks, skip) and returning RAW record
+# dicts with keys: domain, price, date, venue. Normalization, dedupe and
+# sorting are handled centrally in main(). A source raising an exception never
+# aborts the pipeline - the failure is logged and the remaining sources run.
 
-SOURCES: Dict[str, Callable[[int], List[Dict[str, Any]]]] = {
+SOURCES: Dict[str, Callable[[int, int], List[Dict[str, Any]]]] = {
     "dnjournal": scrape_dnjournal,
 }
 
@@ -406,7 +475,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Fetch and merge .si domain sales data")
     parser.add_argument("--dry-run", action="store_true", help="do not write sales.json")
     parser.add_argument("--skip-scrape", action="store_true", help="only merge seed data (no network)")
-    parser.add_argument("--max-weeks", type=int, default=6, help="max DNJournal weekly pages to parse")
+    parser.add_argument("--max-weeks", type=int, default=12, help="max DNJournal weekly pages to parse (across all years)")
+    parser.add_argument("--skip", type=int, default=0, help="skip the newest N archive pages (historical backfill chunking)")
     parser.add_argument("--verbose", action="store_true", help="enable debug logging")
     return parser.parse_args()
 
@@ -435,7 +505,7 @@ def main() -> int:
     if not args.skip_scrape:
         for name, scraper in SOURCES.items():
             try:
-                raw_records = scraper(args.max_weeks)
+                raw_records = scraper(args.max_weeks, args.skip)
             except Exception as exc:
                 logging.warning("Source %r raised an unexpected error: %s", name, exc)
                 raw_records = []

@@ -60,14 +60,15 @@ npm run preview  # serve the production build
 
 1. Loads existing records from `src/data/sales.json`.
 2. Merges manual entries from `scripts/seeds/seed_sales.json` (add curated/private sales here).
-3. Scrapes the current DNJournal weekly chart + the last N archive pages (`--max-weeks`, default 6) and extracts `.si` rows (domain, USD price, venue, reporting-period end date).
+3. Scrapes DNJournal: the current chart page plus the newest N archive pages (`--max-weeks`, default 12) across every year index (2009 → today) and extracts `.si` rows (domain, USD price, venue, reporting-period end date). Most biweekly charts contain zero `.si` rows — public `.si` sale reporting is sparse; the current full archive yields ~109 records.
+4. Historical backfill: `--skip N` drops the newest N archive pages before the `--max-weeks` cap, so the whole archive can be crawled in resumable chunks, e.g. `python scripts/fetch_sales.py --max-weeks 201 --skip 413` (oldest first).
 4. Normalizes (lowercase domain, `id` slug, price/date validation, category heuristic), dedupes by domain, sorts by date desc, and rewrites `sales.json` **only if content changed**.
 
 Rules and caveats:
 
 - **Dedupe:** first-seen wins per domain, except a public record (venue != "Private") replaces a `Private` placeholder.
 - **Currency:** DNJournal rows use the page's explicit `= $X` conversion; bare €/£ fall back to static rates (1.12 / 1.28) defined at the top of the script.
-- **Date:** uses the chart's reporting-period end date (DNJournal publishes weekly/bi-weekly; year-to-date chart rows are dated at their reporting period since DNJ does not publish exact per-sale dates).
+- **Date:** uses the chart's reporting-period end date (DNJournal publishes weekly/bi-weekly; year-to-date chart rows are dated at their reporting period since DNJ does not publish exact per-sale dates). Pages where DNJournal typo's the year are auto-corrected against the issue date in the page URL.
 - **Category:** keyword heuristic when a record has no explicit category; labels ≤ 3 chars become `Short Brandable`.
 - Network failures only log warnings — the run still succeeds and keeps existing data.
 
