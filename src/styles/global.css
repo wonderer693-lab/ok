@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", -apple-system, Roboto, Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background-color: #fafafa;
+  color: #171717;
+}
+
+/* Glowing green live status dot (homepage header) */
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background-color: #10b981;
+  animation: live-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(16 185 129 / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgb(16 185 129 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot {
+    animation: none;
+  }
+}
+
+/* Tab switcher states (toggled by vanilla JS) */
+.tab-btn {
+  color: #525252;
+  transition: color 120ms ease, background-color 120ms ease;
+}
+
+.tab-btn:hover {
+  color: #111827;
+}
+
+.tab-active {
+  background-color: #065f46;
+  color: #ffffff;
+}
+
+.tab-active:hover {
+  color: #ffffff;
+}

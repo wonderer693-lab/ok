@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <title>{title}</title>
+    <slot name="head" />
+  </head>
+  <body class="font-sans antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-white focus:px-3 focus:py-1.5 focus:font-mono focus:text-sm focus:shadow focus:outline focus:outline-2 focus:outline-emerald-700"
+      >Skip to content</a
+    >
+    <header class="border-b border-neutral-200 bg-white">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+        <a href="/" class="flex items-center gap-2.5">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span class="font-mono text-lg font-bold tracking-tight text-neutral-900"
+            >LiveSell<span class="text-emerald-700">SI</span></span
+          >
+        </a>
+        <div class="flex items-center gap-4 font-mono text-xs text-neutral-500">
+          <span class="hidden sm:inline">.si aftermarket data</span>
+          <span
+            class="inline-flex items-center gap-1.5 rounded border border-emerald-200 bg-emerald-50 px-2 py-0.5 font-semibold text-emerald-700"
+            >LIVE</span
+          >
+        </div>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="mt-12 border-t border-neutral-200 bg-white">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-8 font-mono text-xs text-neutral-500 sm:flex-row sm:justify-between sm:px-6"
+      >
+        <p>&copy; {year} LiveSellSI &middot; livesellsi.com</p>
+        <p>Reported public sales only &mdash; not a complete list. Sources: DNJournal, Sedo, Dan.com &amp; private reports.</p>
+      </div>
+    </footer>
+  </body>
+</html>

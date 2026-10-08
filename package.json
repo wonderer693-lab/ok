@@ -1,0 +1,22 @@
+{
+  "name": "livesellsi",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LiveSellSI — verified .si domain sales tracker. Zero-cost static Astro site + GitHub Actions data pipeline.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.4.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "astro": "^5.12.0",
+    "tailwindcss": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

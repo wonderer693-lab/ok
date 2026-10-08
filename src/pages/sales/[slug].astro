@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import raw from '../../data/sales.json';
+import {
+  formatUSD,
+  formatDate,
+  regFeeMultiplier,
+  REG_FEE_USD,
+  type Sale,
+} from '../../lib/format';
+
+export function getStaticPaths() {
+  const allSales = raw as Sale[];
+  return allSales.map((sale) => ({
+    params: { slug: sale.id },
+    props: { sale },
+  }));
+}
+
+const sale = Astro.props.sale as Sale;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const title = `${sale.domain} sold for ${formatUSD(sale.price)} | LiveSellSI`;
+const description = `Verified .si domain sale: ${sale.domain} sold for ${formatUSD(sale.price)} via ${sale.venue} on ${formatDate(sale.date)}. Category: ${sale.category}. Length: ${sale.length} characters.`;
+const multiplier = regFeeMultiplier(sale.price);
+const copyText = `${sale.domain} — ${formatUSD(sale.price)} via ${sale.venue} on ${formatDate(sale.date)} (LiveSellSI)`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: sale.domain,
+  description: `${sale.domain} is a ${sale.length}-character .si domain name sold for ${formatUSD(sale.price)} via ${sale.venue} on ${formatDate(sale.date)}.`,
+  url: canonical.href,
+  brand: { '@type': 'Brand', name: 'LiveSellSI' },
+  offers: {
+    '@type': 'Offer',
+    price: String(sale.price),
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/SoldOut',
+    url: canonical.href,
+  },
+  additionalProperty: [
+    { '@type': 'PropertyValue', name: 'Venue', value: sale.venue },
+    { '@type': 'PropertyValue', name: 'Sale date', value: sale.date },
+    { '@type': 'PropertyValue', name: 'Category', value: sale.category },
+    { '@type': 'PropertyValue', name: 'Length', value: String(sale.length) },
+    { '@type': 'PropertyValue', name: 'Registration fee multiplier', value: `${multiplier}x` },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <meta slot="head" property="og:type" content="website" />
+  <meta slot="head" property="og:title" content={title} />
+  <meta slot="head" property="og:description" content={description} />
+  <meta slot="head" property="og:url" content={canonical.href} />
+  <meta slot="head" property="og:site_name" content="LiveSellSI" />
+  <meta slot="head" name="twitter:card" content="summary" />
+  <meta slot="head" name="twitter:title" content={title} />
+  <meta slot="head" name="twitter:description" content={description} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <a href="/" class="font-mono text-sm text-emerald-700 hover:underline"
+      >&larr; Back to all sales</a
+    >
+
+    <div class="mt-6 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+      <div>
+        <h1 class="font-mono text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+          {sale.domain}
+        </h1>
+        <p class="mt-2 text-sm text-neutral-500">
+          Verified aftermarket sale &middot; {sale.category}
+        </p>
+      </div>
+      <div class="md:text-right">
+        <p class="font-mono text-[11px] uppercase tracking-wider text-neutral-400">Sale price</p>
+        <p class="font-mono text-4xl font-bold tabular-nums text-emerald-700">
+          {formatUSD(sale.price)}
+        </p>
+      </div>
+    </div>
+
+    <dl
+      class="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-neutral-200 bg-neutral-200 sm:grid-cols-3"
+    >
+      <div class="bg-white p-4">
+        <dt class="font-mono text-[11px] uppercase tracking-wider text-neutral-400">Venue</dt>
+        <dd class="mt-1 font-mono font-semibold text-neutral-900">{sale.venue}</dd>
+      </div>
+      <div class="bg-white p-4">
+        <dt class="font-mono text-[11px] uppercase tracking-wider text-neutral-400">Sale date</dt>
+        <dd class="mt-1 font-mono font-semibold tabular-nums text-neutral-900">
+          {formatDate(sale.date)}
+        </dd>
+      </div>
+      <div class="bg-white p-4">
+        <dt class="font-mono text-[11px] uppercase tracking-wider text-neutral-400">Category</dt>
+        <dd class="mt-1 font-mono font-semibold text-neutral-900">{sale.category}</dd>
+      </div>
+      <div class="bg-white p-4">
+        <dt class="font-mono text-[11px] uppercase tracking-wider text-neutral-400">
+          Character length
+        </dt>
+        <dd class="mt-1 font-mono font-semibold tabular-nums text-neutral-900">{sale.length}</dd>
+      </div>
+      <div class="bg-white p-4">
+        <dt class="font-mono text-[11px] uppercase tracking-wider text-neutral-400">
+          Reg. fee (baseline)
+        </dt>
+        <dd class="mt-1 font-mono font-semibold tabular-nums text-neutral-900">
+          ~{formatUSD(REG_FEE_USD)}/yr
+        </dd>
+      </div>
+      <div class="bg-white p-4">
+        <dt class="font-mono text-[11px] uppercase tracking-wider text-neutral-400">
+          Est. reg fee multiplier
+        </dt>
+        <dd class="mt-1 font-mono font-semibold tabular-nums text-emerald-700">
+          &asymp;{multiplier}&times;
+        </dd>
+      </div>
+    </dl>
+
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <button
+        id="copy-btn"
+        type="button"
+        class="rounded-md bg-emerald-700 px-4 py-2 font-mono text-sm font-semibold text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
+      >
+        Copy Data
+      </button>
+      <a
+        href="/"
+        class="rounded-md border border-neutral-300 bg-white px-4 py-2 font-mono text-sm font-semibold text-neutral-700 hover:border-neutral-400"
+      >
+        View Directory
+      </a>
+    </div>
+
+    <p class="mt-6 max-w-2xl text-sm leading-relaxed text-neutral-500">
+      The multiplier compares the reported sale price with the baseline annual registration fee
+      for .si domains (~{formatUSD(REG_FEE_USD)}/yr). Data is collected from publicly reported
+      sales; private transactions may be missing from the directory.
+    </p>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ copyText }}>
+  const button = document.getElementById('copy-btn');
+  button?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(copyText);
+    } catch {
+      const textarea = document.createElement('textarea');
+      textarea.value = copyText;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    }
+    if (!button) return;
+    const original = button.textContent;
+    button.textContent = 'Copied \u2713';
+    window.setTimeout(() => {
+      button.textContent = original;
+    }, 2000);
+  });
+</script>

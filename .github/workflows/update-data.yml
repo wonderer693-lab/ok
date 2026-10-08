@@ -1,0 +1,40 @@
+name: Update Sales Data
+
+on:
+  schedule:
+    # Runs daily at 08:00 and 20:00 UTC (every 12 hours).
+    - cron: '0 8,20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch and merge .si sales
+        run: python scripts/fetch_sales.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/sales.json
+          if git diff --cached --quiet; then
+            echo "No data changes detected — nothing to commit."
+          else
+            git commit -m "chore(data): update .si sales data ($(date -u +%F))"
+            git push
+          fi
+
+# The push above triggers the connected Vercel/Netlify project automatically —
+# no extra deployment step is required on the free tier.

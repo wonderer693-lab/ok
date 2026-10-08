@@ -1,0 +1,578 @@
+[
+  {
+    "id": "ex-si",
+    "domain": "ex.si",
+    "price": 12000,
+    "date": "2026-10-04",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "conquest-si",
+    "domain": "conquest.si",
+    "price": 10000,
+    "date": "2026-10-04",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "cosmic-si",
+    "domain": "cosmic.si",
+    "price": 7995,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "gambling-si",
+    "domain": "gambling.si",
+    "price": 7168,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "betting-si",
+    "domain": "betting.si",
+    "price": 6720,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "economy-si",
+    "domain": "economy.si",
+    "price": 6272,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "capital-si",
+    "domain": "capital.si",
+    "price": 5936,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Finance & Crypto",
+    "length": 7
+  },
+  {
+    "id": "books-si",
+    "domain": "books.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "bq-si",
+    "domain": "bq.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "brave-si",
+    "domain": "brave.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "coins-si",
+    "domain": "coins.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Finance & Crypto",
+    "length": 5
+  },
+  {
+    "id": "family-si",
+    "domain": "family.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "grand-si",
+    "domain": "grand.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "hero-si",
+    "domain": "hero.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "models-si",
+    "domain": "models.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "project-si",
+    "domain": "project.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "success-si",
+    "domain": "success.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "universal-si",
+    "domain": "universal.si",
+    "price": 5376,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "fomo-si",
+    "domain": "fomo.si",
+    "price": 5000,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "heir-si",
+    "domain": "heir.si",
+    "price": 5000,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "official-si",
+    "domain": "official.si",
+    "price": 4984,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "horse-si",
+    "domain": "horse.si",
+    "price": 3999,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "hive-si",
+    "domain": "hive.si",
+    "price": 3988,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "pump-si",
+    "domain": "pump.si",
+    "price": 3988,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "vq-si",
+    "domain": "vq.si",
+    "price": 2800,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "nq-si",
+    "domain": "nq.si",
+    "price": 2666,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "kick-si",
+    "domain": "kick.si",
+    "price": 2495,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "gv-si",
+    "domain": "gv.si",
+    "price": 2000,
+    "date": "2026-10-04",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "go-si",
+    "domain": "go.si",
+    "price": 12500,
+    "date": "2026-09-28",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "iodata-si",
+    "domain": "iodata.si",
+    "price": 3500,
+    "date": "2026-09-15",
+    "venue": "Sedo",
+    "category": "AI Data",
+    "length": 6
+  },
+  {
+    "id": "avto-si",
+    "domain": "avto.si",
+    "price": 15750,
+    "date": "2026-08-19",
+    "venue": "Sedo",
+    "category": "Automotive",
+    "length": 4
+  },
+  {
+    "id": "nepremicnine-si",
+    "domain": "nepremicnine.si",
+    "price": 6500,
+    "date": "2026-07-02",
+    "venue": "Private",
+    "category": "Real Estate",
+    "length": 12
+  },
+  {
+    "id": "foto-si",
+    "domain": "foto.si",
+    "price": 3900,
+    "date": "2026-06-30",
+    "venue": "Dan.com",
+    "category": "Photography",
+    "length": 4
+  },
+  {
+    "id": "bot-si",
+    "domain": "bot.si",
+    "price": 20000,
+    "date": "2026-06-21",
+    "venue": "Sedo",
+    "category": "AI Data",
+    "length": 3
+  },
+  {
+    "id": "kripto-si",
+    "domain": "kripto.si",
+    "price": 8800,
+    "date": "2026-05-10",
+    "venue": "Dan.com",
+    "category": "Finance & Crypto",
+    "length": 6
+  },
+  {
+    "id": "vino-si",
+    "domain": "vino.si",
+    "price": 4200,
+    "date": "2026-03-27",
+    "venue": "Sedo",
+    "category": "Food & Drink",
+    "length": 4
+  },
+  {
+    "id": "igre-si",
+    "domain": "igre.si",
+    "price": 5400,
+    "date": "2026-02-14",
+    "venue": "Sedo",
+    "category": "Gaming",
+    "length": 4
+  },
+  {
+    "id": "pivo-si",
+    "domain": "pivo.si",
+    "price": 2800,
+    "date": "2025-12-18",
+    "venue": "Afternic",
+    "category": "Food & Drink",
+    "length": 4
+  },
+  {
+    "id": "zavarovanje-si",
+    "domain": "zavarovanje.si",
+    "price": 7100,
+    "date": "2025-11-06",
+    "venue": "Private",
+    "category": "Insurance",
+    "length": 11
+  },
+  {
+    "id": "novice-si",
+    "domain": "novice.si",
+    "price": 9600,
+    "date": "2025-10-22",
+    "venue": "Sedo",
+    "category": "Media",
+    "length": 6
+  },
+  {
+    "id": "pocitnice-si",
+    "domain": "pocitnice.si",
+    "price": 4300,
+    "date": "2025-09-09",
+    "venue": "Dan.com",
+    "category": "Travel",
+    "length": 10
+  },
+  {
+    "id": "kviz-si",
+    "domain": "kviz.si",
+    "price": 1900,
+    "date": "2025-08-15",
+    "venue": "Flippa",
+    "category": "Gaming",
+    "length": 4
+  },
+  {
+    "id": "recepti-si",
+    "domain": "recepti.si",
+    "price": 3600,
+    "date": "2025-07-19",
+    "venue": "Sedo",
+    "category": "Food & Drink",
+    "length": 7
+  },
+  {
+    "id": "polnilec-si",
+    "domain": "polnilec.si",
+    "price": 1750,
+    "date": "2025-06-25",
+    "venue": "GoDaddy",
+    "category": "E-commerce",
+    "length": 8
+  },
+  {
+    "id": "kolesa-si",
+    "domain": "kolesa.si",
+    "price": 5900,
+    "date": "2025-05-13",
+    "venue": "Sedo",
+    "category": "Automotive",
+    "length": 6
+  },
+  {
+    "id": "hrana-si",
+    "domain": "hrana.si",
+    "price": 3100,
+    "date": "2025-04-08",
+    "venue": "Private",
+    "category": "Food & Drink",
+    "length": 5
+  },
+  {
+    "id": "bitcoin-si",
+    "domain": "bitcoin.si",
+    "price": 12200,
+    "date": "2025-03-21",
+    "venue": "Dan.com",
+    "category": "Finance & Crypto",
+    "length": 7
+  },
+  {
+    "id": "zdravje-si",
+    "domain": "zdravje.si",
+    "price": 5200,
+    "date": "2025-02-11",
+    "venue": "Sedo",
+    "category": "Health",
+    "length": 7
+  },
+  {
+    "id": "letalo-si",
+    "domain": "letalo.si",
+    "price": 2400,
+    "date": "2025-01-17",
+    "venue": "Afternic",
+    "category": "Travel",
+    "length": 6
+  },
+  {
+    "id": "energija-si",
+    "domain": "energija.si",
+    "price": 4800,
+    "date": "2024-12-04",
+    "venue": "Sedo",
+    "category": "Energy",
+    "length": 8
+  },
+  {
+    "id": "zaposlitev-si",
+    "domain": "zaposlitev.si",
+    "price": 3900,
+    "date": "2024-11-05",
+    "venue": "Private",
+    "category": "Jobs",
+    "length": 10
+  },
+  {
+    "id": "vrt-si",
+    "domain": "vrt.si",
+    "price": 2100,
+    "date": "2024-09-14",
+    "venue": "Sedo",
+    "category": "Home & Garden",
+    "length": 3
+  },
+  {
+    "id": "kava-si",
+    "domain": "kava.si",
+    "price": 3300,
+    "date": "2024-08-07",
+    "venue": "Dan.com",
+    "category": "Food & Drink",
+    "length": 4
+  },
+  {
+    "id": "cloud-si",
+    "domain": "cloud.si",
+    "price": 7600,
+    "date": "2024-06-20",
+    "venue": "Sedo",
+    "category": "Tech SaaS",
+    "length": 5
+  },
+  {
+    "id": "plus-si",
+    "domain": "plus.si",
+    "price": 4500,
+    "date": "2024-05-16",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 4
+  },
+  {
+    "id": "nalozba-si",
+    "domain": "nalozba.si",
+    "price": 5200,
+    "date": "2024-04-02",
+    "venue": "Private",
+    "category": "Finance & Crypto",
+    "length": 7
+  },
+  {
+    "id": "4u-si",
+    "domain": "4u.si",
+    "price": 1500,
+    "date": "2024-02-28",
+    "venue": "Flippa",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "splet-si",
+    "domain": "splet.si",
+    "price": 8900,
+    "date": "2024-01-19",
+    "venue": "Sedo",
+    "category": "Tech SaaS",
+    "length": 5
+  },
+  {
+    "id": "invest-si",
+    "domain": "invest.si",
+    "price": 11000,
+    "date": "2023-11-12",
+    "venue": "Private",
+    "category": "Finance & Crypto",
+    "length": 6
+  },
+  {
+    "id": "mama-si",
+    "domain": "mama.si",
+    "price": 2700,
+    "date": "2023-09-08",
+    "venue": "Sedo",
+    "category": "Lifestyle",
+    "length": 4
+  },
+  {
+    "id": "kmetija-si",
+    "domain": "kmetija.si",
+    "price": 3100,
+    "date": "2023-07-15",
+    "venue": "Dan.com",
+    "category": "Agriculture",
+    "length": 7
+  },
+  {
+    "id": "terme-si",
+    "domain": "terme.si",
+    "price": 4600,
+    "date": "2023-05-20",
+    "venue": "Sedo",
+    "category": "Travel",
+    "length": 5
+  },
+  {
+    "id": "pes-si",
+    "domain": "pes.si",
+    "price": 900,
+    "date": "2023-03-30",
+    "venue": "GoDaddy",
+    "category": "Pets",
+    "length": 3
+  },
+  {
+    "id": "taksi-si",
+    "domain": "taksi.si",
+    "price": 2400,
+    "date": "2022-12-01",
+    "venue": "Private",
+    "category": "Travel",
+    "length": 5
+  }
+]

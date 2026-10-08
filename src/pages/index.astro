@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SalesTable from '../components/SalesTable.astro';
+import raw from '../data/sales.json';
+import { formatUSD, formatDate, sortByDateDesc, sortByPriceDesc, type Sale } from '../lib/format';
+
+const sales = raw as Sale[];
+const latest = [...sales].sort(sortByDateDesc);
+const top = [...sales].sort(sortByPriceDesc);
+const totalVolume = sales.reduce((sum, sale) => sum + sale.price, 0);
+const tracked = sales.length;
+const lastUpdated = latest[0]?.date ?? null;
+---
+
+<BaseLayout
+  title="LiveSellSI — Verified .si Domain Sales"
+  description="Tracked .si domain sales: price, venue, date and category for every publicly reported Slovenian TLD aftermarket transaction."
+>
+  <section class="border-b border-neutral-200 bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
+            Verified <span class="text-emerald-700">.si</span> domain sales
+          </h1>
+          <p class="mt-1 text-sm text-neutral-500">
+            Public aftermarket data for the Slovenian country-code TLD. Pipeline runs every 12h.
+            {lastUpdated && <>Last record: {formatDate(lastUpdated)}.</>}
+          </p>
+        </div>
+        <dl class="flex gap-8 font-mono">
+          <div>
+            <dt class="text-[11px] uppercase tracking-wider text-neutral-400">Total Volume</dt>
+            <dd class="text-xl font-bold tabular-nums text-emerald-700">{formatUSD(totalVolume)}</dd>
+          </div>
+          <div>
+            <dt class="text-[11px] uppercase tracking-wider text-neutral-400">Tracked Sales</dt>
+            <dd class="text-xl font-bold tabular-nums text-neutral-900">{tracked}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+    <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div
+        class="inline-flex rounded-md border border-neutral-300 bg-white p-0.5"
+        role="tablist"
+        aria-label="Sales view"
+      >
+        <button
+          type="button"
+          role="tab"
+          aria-selected="true"
+          data-tab="latest"
+          class="tab-btn tab-active rounded px-4 py-1.5 font-mono text-sm font-semibold"
+        >
+          Latest Sales
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected="false"
+          data-tab="top"
+          class="tab-btn rounded px-4 py-1.5 font-mono text-sm font-semibold"
+        >
+          Top Sales
+        </button>
+      </div>
+      <label class="relative block sm:w-72">
+        <span class="sr-only">Search domains</span>
+        <input
+          id="search"
+          type="search"
+          placeholder="Filter by domain… e.g. avto"
+          autocomplete="off"
+          class="w-full rounded-md border border-neutral-300 bg-white px-3 py-1.5 font-mono text-sm placeholder:text-neutral-400 focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+        />
+      </label>
+    </div>
+
+    <div data-panel="latest">
+      <SalesTable id="latest" sales={latest} />
+    </div>
+    <div data-panel="top" hidden>
+      <SalesTable id="top" sales={top} />
+    </div>
+    <p class="mt-3 font-mono text-xs text-neutral-400" id="result-hint" aria-live="polite"></p>
+  </section>
+</BaseLayout>
+
+<script>
+  const panels = document.querySelectorAll<HTMLElement>('[data-panel]');
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-tab]');
+  const search = document.getElementById('search') as HTMLInputElement;
+  const hint = document.getElementById('result-hint');
+  let activeTab = 'latest';
+
+  function setActiveTab(tab: string) {
+    activeTab = tab;
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.panel !== tab;
+    });
+    tabs.forEach((button) => {
+      const selected = button.dataset.tab === tab;
+      button.setAttribute('aria-selected', String(selected));
+      button.classList.toggle('tab-active', selected);
+    });
+    applyFilter();
+  }
+
+  function applyFilter() {
+    const query = search.value.trim().toLowerCase();
+    panels.forEach((panel) => {
+      if (panel.hidden) return;
+      let visible = 0;
+      panel.querySelectorAll<HTMLTableRowElement>('tbody tr[data-domain]').forEach((row) => {
+        const match = !query || (row.dataset.domain ?? '').includes(query);
+        row.classList.toggle('hidden', !match);
+        if (match) visible += 1;
+      });
+      const empty = panel.querySelector<HTMLTableRowElement>('.no-results');
+      if (empty) empty.classList.toggle('hidden', visible !== 0);
+      if (hint) {
+        hint.textContent = query
+          ? `${visible} result${visible === 1 ? '' : 's'} for "${search.value}"`
+          : '';
+      }
+    });
+  }
+
+  tabs.forEach((button) =>
+    button.addEventListener('click', () => setActiveTab(button.dataset.tab ?? 'latest')),
+  );
+  search.addEventListener('input', applyFilter);
+</script>

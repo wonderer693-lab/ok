@@ -1,0 +1,86 @@
+---
+import { formatUSD, formatDate, type Sale } from '../lib/format';
+
+interface Props {
+  id: string;
+  sales: Sale[];
+}
+
+const { id, sales } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-lg border border-neutral-200 bg-white shadow-sm">
+  <table class="w-full min-w-[640px] border-collapse text-sm" id={`table-${id}`}>
+    <thead>
+      <tr class="border-b border-neutral-200 bg-neutral-50 text-left">
+        <th
+          scope="col"
+          class="px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-neutral-500"
+        >
+          Domain
+        </th>
+        <th
+          scope="col"
+          class="px-4 py-3 text-right font-mono text-[11px] font-semibold uppercase tracking-wider text-neutral-500"
+        >
+          Price (USD)
+        </th>
+        <th
+          scope="col"
+          class="px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-neutral-500"
+        >
+          Venue
+        </th>
+        <th
+          scope="col"
+          class="px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-neutral-500"
+        >
+          Sale Date
+        </th>
+        <th scope="col" class="px-4 py-3 text-right">
+          <span class="sr-only">Actions</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        sales.map((sale) => (
+          <tr
+            data-domain={sale.domain.toLowerCase()}
+            data-price={sale.price}
+            class="border-b border-neutral-100 transition-colors last:border-0 hover:bg-neutral-50"
+          >
+            <td class="px-4 py-2.5">
+              <a
+                href={`/sales/${sale.id}/`}
+                class="font-mono font-semibold text-neutral-900 hover:text-emerald-700 hover:underline"
+                >{sale.domain}</a
+              >
+              <span class="ml-2 hidden text-xs text-neutral-400 md:inline">{sale.category}</span>
+            </td>
+            <td class="px-4 py-2.5 text-right font-mono font-semibold tabular-nums text-emerald-700">
+              {formatUSD(sale.price)}
+            </td>
+            <td class="px-4 py-2.5">
+              <span
+                class="inline-block rounded border border-neutral-300 bg-white px-2 py-0.5 font-mono text-xs text-neutral-600"
+                >{sale.venue}</span
+              >
+            </td>
+            <td class="px-4 py-2.5 font-mono tabular-nums text-neutral-600">{formatDate(sale.date)}</td>
+            <td class="px-4 py-2.5 text-right">
+              <a href={`/sales/${sale.id}/`} class="font-mono text-xs text-emerald-700 hover:underline"
+                >View Details &rarr;</a
+              >
+            </td>
+          </tr>
+        ))
+      }
+      <tr class="no-results hidden">
+        <td colspan="5" class="px-4 py-6 text-center font-mono text-sm text-neutral-500">
+          No matching .si sales.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
