@@ -2,8 +2,8 @@ name: Update Sales Data
 
 on:
   schedule:
-    # Runs daily at 08:00 and 20:00 UTC (every 12 hours).
-    - cron: '0 8,20 * * *'
+    # Runs every 12 hours at 00:00 and 12:00 UTC.
+    - cron: '0 */12 * * *'
   workflow_dispatch:
 
 permissions:
@@ -20,9 +20,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: 'scripts/requirements.txt'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
 
       - name: Fetch and merge .si sales
         run: python scripts/fetch_sales.py
+        env:
+          PYTHONUNBUFFERED: '1'
 
       - name: Commit and push changes
         run: |
@@ -30,9 +37,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/data/sales.json
           if git diff --cached --quiet; then
-            echo "No data changes detected — nothing to commit."
+            echo "No changes detected in src/data/sales.json — nothing to commit."
           else
-            git commit -m "chore(data): update .si sales data ($(date -u +%F))"
+            git commit -m "Auto-update domain sales data"
             git push
           fi
 

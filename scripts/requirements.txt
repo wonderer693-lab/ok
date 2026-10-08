@@ -1,0 +1,9 @@
+# LiveSellSI data pipeline dependencies (scripts/fetch_sales.py)
+#
+# beautifulsoup4 - tree-based HTML table extraction for DNJournal charts.
+#   The script falls back to a stdlib regex parser if it is missing, but
+#   the GitHub Actions workflow always installs it.
+# requests - not used by the built-in DNJournal source yet; pre-installed so
+#   future API/RSS source modules can rely on it without workflow changes.
+beautifulsoup4>=4.12
+requests>=2.31

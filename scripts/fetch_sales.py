@@ -2,23 +2,32 @@
 """LiveSellSI data pipeline - fetch, normalize, dedupe and store .si domain sales.
 
 Runs on GitHub Actions (see .github/workflows/update-data.yml) and locally.
-Uses ONLY the Python standard library - no pip dependencies, zero cost.
 
 Data flow:
   1. Load existing records from src/data/sales.json
   2. Merge manual/seed entries from scripts/seeds/seed_sales.json
-  3. Scrape publicly reported sales from DNJournal weekly charts
+  3. Run every registered source in SOURCES (see below)
   4. Deduplicate by domain name, sort by date descending,
      rewrite src/data/sales.json
 
 Dedupe rule: first-seen wins, EXCEPT a public record (venue != "Private")
 replaces an existing "Private" placeholder for the same domain.
 
-The process exits 0 even when the network is unreachable (only warnings are
-logged), so scheduled CI runs never break the build. The file is only
-rewritten when content actually changed, which keeps git history clean.
+The process exits 0 even when the network is unreachable or a source crashes
+(only warnings are logged), so scheduled CI runs never break the build. The
+file is only rewritten when content actually changed, which keeps git history
+clean and avoids no-op commits.
 
-Requirements: Python 3.9+.
+Dependencies: Python 3.9+ standard library by default. Optional extras from
+scripts/requirements.txt:
+  - beautifulsoup4: tree-based HTML row extraction (recommended in CI);
+    a stdlib regex fallback keeps the script fully functional without it.
+  - requests: reserved for future API/RSS source modules.
+
+Adding a new source (RSS feed, API, public archive):
+  write a function `def scrape_my_source(max_weeks: int) -> list[dict]`
+  returning RAW records {"domain", "price", "date", "venue"} and register
+  it in the SOURCES dict. Normalization, dedupe and sorting happen centrally.
 """
 
 from __future__ import annotations
@@ -33,11 +42,20 @@ import urllib.request
 from datetime import datetime
 from html import unescape
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_FILE = ROOT / "src" / "data" / "sales.json"
 SEED_FILE = ROOT / "scripts" / "seeds" / "seed_sales.json"
+
+# --- Optional third-party dependencies ---------------------------------------
+
+try:
+    from bs4 import BeautifulSoup
+
+    HAS_BS4 = True
+except ImportError:
+    HAS_BS4 = False
 
 # --- Source configuration ----------------------------------------------------
 
@@ -132,6 +150,18 @@ def clean_text(raw: str) -> str:
     return re.sub(r"\s+", " ", TAG_RE.sub(" ", unescape(raw))).strip()
 
 
+def extract_rows(html: str) -> List[str]:
+    """Return cleaned <tr> texts in document order.
+
+    Uses BeautifulSoup's tree-based extraction when installed (robust against
+    malformed markup); falls back to regex otherwise.
+    """
+    if HAS_BS4:
+        soup = BeautifulSoup(html, "html.parser")
+        return [re.sub(r"\s+", " ", tr.get_text(" ", strip=True)).strip() for tr in soup.find_all("tr")]
+    return [clean_text(row_html) for row_html in ROW_RE.findall(html)]
+
+
 def fetch_text(url: str) -> str:
     """Fetch a URL as text. Returns '' on any network/HTTP error."""
     try:
@@ -195,8 +225,7 @@ def parse_dnj_rows(html: str, date_iso: str) -> List[Dict[str, Any]]:
     precedes them inside the same row.
     """
     records: List[Dict[str, Any]] = []
-    for row_html in ROW_RE.findall(html):
-        text = clean_text(row_html)
+    for text in extract_rows(html):
         price_matches = list(PRICE_ALT_RE.finditer(text))
         if not price_matches:
             continue
@@ -238,6 +267,35 @@ def discover_dnj_pages(max_weeks: int) -> List[str]:
         pages = pages[-(max_weeks - 1):]
     pages.append(DNJ_CURRENT_PAGE)
     return pages
+
+
+def scrape_dnjournal(max_weeks: int) -> List[Dict[str, Any]]:
+    """Fetch DNJournal weekly charts and return raw .si sale records."""
+    records: List[Dict[str, Any]] = []
+    for page in discover_dnj_pages(max(1, max_weeks)):
+        html = fetch_text(page)
+        if not html:
+            continue
+        date_iso = parse_period_end(html)
+        if not date_iso:
+            logging.warning("No reporting period found on %s - skipping page", page)
+            continue
+        rows = parse_dnj_rows(html, date_iso)
+        logging.info("%s: %s .si row(s) found (period end %s)", page, len(rows), date_iso)
+        records.extend(rows)
+    return records
+
+
+# --- Source registry ----------------------------------------------------------
+#
+# Each source is a callable taking `max_weeks` and returning RAW record dicts
+# with keys: domain, price, date, venue. Normalization, dedupe and sorting are
+# handled centrally in main(). A source raising an exception never aborts the
+# pipeline - the failure is logged and the remaining sources still run.
+
+SOURCES: Dict[str, Callable[[int], List[Dict[str, Any]]]] = {
+    "dnjournal": scrape_dnjournal,
+}
 
 
 # --- Normalization ------------------------------------------------------------
@@ -360,8 +418,8 @@ def main() -> int:
         format="%(asctime)s | %(levelname)-7s | %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )
-    logging.info("LiveSellSI pipeline started (dry-run=%s, scrape=%s)",
-                 args.dry_run, not args.skip_scrape)
+    logging.info("LiveSellSI pipeline started (dry-run=%s, scrape=%s, bs4=%s)",
+                 args.dry_run, not args.skip_scrape, HAS_BS4)
 
     # 1. Load existing + seed data
     raw_existing, existing = load_file(DATA_FILE)
@@ -373,20 +431,18 @@ def main() -> int:
     logging.info("Seed merge: %s existing, %s seed, %s total after dedupe",
                  before, len(seeds), len(records))
 
-    # 2. Scrape public sources (oldest pages first so earliest reporting wins)
+    # 2. Run every registered source; one failing source never aborts the run
     if not args.skip_scrape:
-        for page in discover_dnj_pages(max(1, args.max_weeks)):
-            html = fetch_text(page)
-            if not html:
-                continue
-            date_iso = parse_period_end(html)
-            if not date_iso:
-                logging.warning("No reporting period found on %s - skipping page", page)
-                continue
-            rows = parse_dnj_rows(html, date_iso)
-            logging.info("%s: %s .si row(s) found (period end %s)", page, len(rows), date_iso)
-            scraped = [record for record in (normalize(r, "dnjournal") for r in rows) if record]
+        for name, scraper in SOURCES.items():
+            try:
+                raw_records = scraper(args.max_weeks)
+            except Exception as exc:
+                logging.warning("Source %r raised an unexpected error: %s", name, exc)
+                raw_records = []
+            scraped = [record for record in (normalize(r, name) for r in raw_records) if record]
             records = merge_records(records, scraped)
+            logging.info("Source %r: %s usable record(s), %s total after dedupe",
+                         name, len(scraped), len(records))
 
     # 3. Sort and serialize
     records.sort(key=lambda r: (r["date"], r["price"]), reverse=True)
