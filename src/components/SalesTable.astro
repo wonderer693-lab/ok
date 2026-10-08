@@ -84,3 +84,14 @@ const { id, sales } = Astro.props;
     </tbody>
   </table>
 </div>
+
+<nav class="pager" data-pager aria-label="Sales pagination" hidden>
+  <p class="pager-label" data-page-label>Page 1 of 1</p>
+  <div class="pager-controls">
+    <button type="button" class="page-btn" data-page-prev aria-label="Previous page"
+      >&larr; Prev</button
+    >
+    <div class="pager-numbers" data-page-numbers></div>
+    <button type="button" class="page-btn" data-page-next aria-label="Next page">Next &rarr;</button>
+  </div>
+</nav>

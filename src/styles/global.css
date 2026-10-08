@@ -57,3 +57,78 @@ body {
 .tab-active:hover {
   color: #ffffff;
 }
+
+/* Deterministic hide for elements toggled via the `hidden` attribute.
+   Without !important, display utilities like .flex can leak through. */
+[hidden] {
+  display: none !important;
+}
+
+/* Client-side pagination controls */
+.pager {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .pager {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.pager-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #737373;
+}
+
+.pager-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.pager-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.page-btn,
+.page-num {
+  border: 1px solid #d4d4d4;
+  border-radius: 0.25rem;
+  background-color: #ffffff;
+  color: #404040;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  cursor: pointer;
+}
+
+.page-num {
+  min-width: 1.75rem;
+  padding: 0.125rem 0.375rem;
+}
+
+.page-btn:hover:not(:disabled),
+.page-num:hover {
+  border-color: #a3a3a3;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-num-active,
+.page-num-active:hover {
+  background-color: #065f46;
+  border-color: #065f46;
+  color: #ffffff;
+}

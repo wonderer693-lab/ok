@@ -91,14 +91,70 @@ const lastUpdated = latest[0]?.date ?? null;
 </BaseLayout>
 
 <script>
+  const PER_PAGE = 25;
   const panels = document.querySelectorAll<HTMLElement>('[data-panel]');
   const tabs = document.querySelectorAll<HTMLButtonElement>('[data-tab]');
   const search = document.getElementById('search') as HTMLInputElement;
   const hint = document.getElementById('result-hint');
-  let activeTab = 'latest';
+  const pagerState = new WeakMap<HTMLElement, { page: number }>();
+
+  panels.forEach((panel) => pagerState.set(panel, { page: 1 }));
+
+  function renderPager(panel: HTMLElement, page: number, pageCount: number) {
+    const pager = panel.querySelector<HTMLElement>('[data-pager]');
+    if (!pager) return;
+    pager.hidden = pageCount <= 1;
+    const label = pager.querySelector<HTMLElement>('[data-page-label]');
+    if (label) label.textContent = `Page ${page} of ${pageCount}`;
+    const prev = pager.querySelector<HTMLButtonElement>('[data-page-prev]');
+    const next = pager.querySelector<HTMLButtonElement>('[data-page-next]');
+    if (prev) prev.disabled = page <= 1;
+    if (next) next.disabled = page >= pageCount;
+    const numbers = pager.querySelector<HTMLElement>('[data-page-numbers]');
+    if (!numbers) return;
+    numbers.textContent = '';
+    for (let i = 1; i <= pageCount; i += 1) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = String(i);
+      button.className = i === page ? 'page-num page-num-active' : 'page-num';
+      button.dataset.page = String(i);
+      button.setAttribute('aria-label', `Page ${i}`);
+      if (i === page) button.setAttribute('aria-current', 'page');
+      numbers.appendChild(button);
+    }
+  }
+
+  function renderPanel(panel: HTMLElement, query: string) {
+    const state = pagerState.get(panel) ?? { page: 1 };
+    pagerState.set(panel, state);
+    const rows = Array.from(panel.querySelectorAll<HTMLTableRowElement>('tbody tr[data-domain]'));
+    const matches = query ? rows.filter((row) => (row.dataset.domain ?? '').includes(query)) : rows;
+    const pageCount = Math.max(1, Math.ceil(matches.length / PER_PAGE));
+    state.page = Math.min(Math.max(1, state.page), pageCount);
+    const pageRows = new Set(matches.slice((state.page - 1) * PER_PAGE, state.page * PER_PAGE));
+    rows.forEach((row) => row.classList.toggle('hidden', !pageRows.has(row)));
+
+    const empty = panel.querySelector<HTMLTableRowElement>('.no-results');
+    if (empty) empty.classList.toggle('hidden', matches.length !== 0);
+
+    renderPager(panel, state.page, pageCount);
+
+    if (hint) {
+      hint.textContent = query
+        ? `${matches.length} result${matches.length === 1 ? '' : 's'} for "${search.value}"`
+        : '';
+    }
+  }
+
+  function renderActivePanel() {
+    const query = search.value.trim().toLowerCase();
+    panels.forEach((panel) => {
+      if (!panel.hidden) renderPanel(panel, query);
+    });
+  }
 
   function setActiveTab(tab: string) {
-    activeTab = tab;
     panels.forEach((panel) => {
       panel.hidden = panel.dataset.panel !== tab;
     });
@@ -107,31 +163,45 @@ const lastUpdated = latest[0]?.date ?? null;
       button.setAttribute('aria-selected', String(selected));
       button.classList.toggle('tab-active', selected);
     });
-    applyFilter();
+    renderActivePanel();
   }
 
-  function applyFilter() {
-    const query = search.value.trim().toLowerCase();
-    panels.forEach((panel) => {
-      if (panel.hidden) return;
-      let visible = 0;
-      panel.querySelectorAll<HTMLTableRowElement>('tbody tr[data-domain]').forEach((row) => {
-        const match = !query || (row.dataset.domain ?? '').includes(query);
-        row.classList.toggle('hidden', !match);
-        if (match) visible += 1;
-      });
-      const empty = panel.querySelector<HTMLTableRowElement>('.no-results');
-      if (empty) empty.classList.toggle('hidden', visible !== 0);
-      if (hint) {
-        hint.textContent = query
-          ? `${visible} result${visible === 1 ? '' : 's'} for "${search.value}"`
-          : '';
-      }
-    });
+  function rerender(panel: HTMLElement) {
+    renderPanel(panel, search.value.trim().toLowerCase());
   }
 
   tabs.forEach((button) =>
     button.addEventListener('click', () => setActiveTab(button.dataset.tab ?? 'latest')),
   );
-  search.addEventListener('input', applyFilter);
+
+  search.addEventListener('input', () => {
+    panels.forEach((panel) => {
+      const state = pagerState.get(panel);
+      if (state) state.page = 1;
+    });
+    renderActivePanel();
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    const panel = target.closest<HTMLElement>('[data-panel]');
+    if (!panel) return;
+    const state = pagerState.get(panel);
+    if (!state) return;
+    if (target.closest('[data-page-prev]')) {
+      state.page -= 1;
+      rerender(panel);
+    } else if (target.closest('[data-page-next]')) {
+      state.page += 1;
+      rerender(panel);
+    } else {
+      const number = target.closest<HTMLButtonElement>('[data-page]');
+      if (number) {
+        state.page = Number(number.dataset.page);
+        rerender(panel);
+      }
+    }
+  });
+
+  renderActivePanel();
 </script>
