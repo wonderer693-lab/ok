@@ -2,8 +2,13 @@ name: Update Sales Data
 
 on:
   schedule:
-    # Runs every 12 hours at 00:00 and 12:00 UTC.
+    # Target cadence: every 12 hours (00:00 and 12:00 UTC).
+    # GitHub frequently DELAYS scheduled jobs under load (observed: a 00:00
+    # job ran 04:40; a 12:00 job ran 17:59). The extra 06:00/18:00 run keeps
+    # the worst-case data freshness inside ~12h even with such delays.
+    # Public repos get unlimited Actions minutes, so this stays free.
     - cron: '0 */12 * * *'
+    - cron: '0 6,18 * * *'
   workflow_dispatch:
 
 permissions:
