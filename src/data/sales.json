@@ -1,5 +1,50 @@
 [
   {
+    "id": "staffing-si",
+    "domain": "staffing.si",
+    "price": 50000,
+    "date": "2026-10-10",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "gifts-si",
+    "domain": "gifts.si",
+    "price": 31364,
+    "date": "2026-10-10",
+    "venue": "Fruits.co",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "celeste-si",
+    "domain": "celeste.si",
+    "price": 8595,
+    "date": "2026-10-10",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "nerds-si",
+    "domain": "nerds.si",
+    "price": 5000,
+    "date": "2026-10-10",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "achieve-si",
+    "domain": "achieve.si",
+    "price": 4688,
+    "date": "2026-10-10",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
     "id": "ivo-si",
     "domain": "ivo.si",
     "price": 7159,
