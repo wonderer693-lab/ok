@@ -54,6 +54,33 @@
     "length": 3
   },
   {
+    "id": "silo-si",
+    "domain": "silo.si",
+    "price": 4888,
+    "date": "2026-10-09",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "nesa-si",
+    "domain": "nesa.si",
+    "price": 9500,
+    "date": "2026-10-08",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "gear-si",
+    "domain": "gear.si",
+    "price": 8592,
+    "date": "2026-10-08",
+    "venue": "Fruits.co",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
     "id": "pure-si",
     "domain": "pure.si",
     "price": 27045,
