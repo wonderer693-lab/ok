@@ -1,5 +1,86 @@
 [
   {
+    "id": "plasma-si",
+    "domain": "plasma.si",
+    "price": 20000,
+    "date": "2026-10-13",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "dubai-si",
+    "domain": "dubai.si",
+    "price": 20000,
+    "date": "2026-10-13",
+    "venue": "Sedo",
+    "category": "AI Data",
+    "length": 5
+  },
+  {
+    "id": "diamond-si",
+    "domain": "diamond.si",
+    "price": 11247,
+    "date": "2026-10-13",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "fullpower-si",
+    "domain": "fullpower.si",
+    "price": 9995,
+    "date": "2026-10-13",
+    "venue": "NameOffice.com",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "latent-si",
+    "domain": "latent.si",
+    "price": 8888,
+    "date": "2026-10-13",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "qa-si",
+    "domain": "qa.si",
+    "price": 7809,
+    "date": "2026-10-13",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "genes-si",
+    "domain": "genes.si",
+    "price": 7500,
+    "date": "2026-10-13",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "bollywood-si",
+    "domain": "bollywood.si",
+    "price": 7252,
+    "date": "2026-10-13",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "built-si",
+    "domain": "built.si",
+    "price": 3500,
+    "date": "2026-10-12",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
     "id": "staffing-si",
     "domain": "staffing.si",
     "price": 50000,
