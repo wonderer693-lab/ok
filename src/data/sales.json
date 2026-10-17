@@ -9,6 +9,42 @@
     "length": 3
   },
   {
+    "id": "inspect-si",
+    "domain": "inspect.si",
+    "price": 8289,
+    "date": "2026-10-16",
+    "venue": "DomainExchange.si",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "receptionist-si",
+    "domain": "receptionist.si",
+    "price": 6189,
+    "date": "2026-10-16",
+    "venue": "DomainExchange.si",
+    "category": "Food & Drink",
+    "length": 12
+  },
+  {
+    "id": "crest-si",
+    "domain": "crest.si",
+    "price": 4000,
+    "date": "2026-10-16",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "zest-si",
+    "domain": "zest.si",
+    "price": 3700,
+    "date": "2026-10-16",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
     "id": "rebellion-si",
     "domain": "rebellion.si",
     "price": 28700,
