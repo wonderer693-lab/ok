@@ -1,5 +1,95 @@
 [
   {
+    "id": "zel-si",
+    "domain": "zel.si",
+    "price": 13170,
+    "date": "2026-10-16",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "rebellion-si",
+    "domain": "rebellion.si",
+    "price": 28700,
+    "date": "2026-10-15",
+    "venue": "Name.si",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "proxy-si",
+    "domain": "proxy.si",
+    "price": 12438,
+    "date": "2026-10-15",
+    "venue": "Fruits.co",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "uap-si",
+    "domain": "uap.si",
+    "price": 7500,
+    "date": "2026-10-15",
+    "venue": "Spaceship",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "indy-si",
+    "domain": "indy.si",
+    "price": 4300,
+    "date": "2026-10-15",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "chips-si",
+    "domain": "chips.si",
+    "price": 4000,
+    "date": "2026-10-15",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "southkorea-si",
+    "domain": "southkorea.si",
+    "price": 20000,
+    "date": "2026-10-14",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 10
+  },
+  {
+    "id": "philippines-si",
+    "domain": "philippines.si",
+    "price": 10000,
+    "date": "2026-10-14",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 11
+  },
+  {
+    "id": "gx-si",
+    "domain": "gx.si",
+    "price": 5655,
+    "date": "2026-10-14",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "proximal-si",
+    "domain": "proximal.si",
+    "price": 5000,
+    "date": "2026-10-14",
+    "venue": "Spaceship",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
     "id": "plasma-si",
     "domain": "plasma.si",
     "price": 20000,
