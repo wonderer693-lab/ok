@@ -1,5 +1,41 @@
 [
   {
+    "id": "openrouter-si",
+    "domain": "openrouter.si",
+    "price": 50000,
+    "date": "2026-10-17",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 10
+  },
+  {
+    "id": "mobilize-si",
+    "domain": "mobilize.si",
+    "price": 5250,
+    "date": "2026-10-17",
+    "venue": "DomainExchange.si",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "redeem-si",
+    "domain": "redeem.si",
+    "price": 5250,
+    "date": "2026-10-17",
+    "venue": "DomainExchange.si",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "rave-si",
+    "domain": "rave.si",
+    "price": 4999,
+    "date": "2026-10-17",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
     "id": "zel-si",
     "domain": "zel.si",
     "price": 13170,
