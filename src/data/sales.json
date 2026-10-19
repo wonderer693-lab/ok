@@ -1,5 +1,32 @@
 [
   {
+    "id": "fn-si",
+    "domain": "fn.si",
+    "price": 11124,
+    "date": "2026-10-18",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "thread-si",
+    "domain": "thread.si",
+    "price": 10000,
+    "date": "2026-10-18",
+    "venue": "Spaceship",
+    "category": "Jobs",
+    "length": 6
+  },
+  {
+    "id": "timeless-si",
+    "domain": "timeless.si",
+    "price": 4888,
+    "date": "2026-10-18",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
     "id": "openrouter-si",
     "domain": "openrouter.si",
     "price": 50000,
