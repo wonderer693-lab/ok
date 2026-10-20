@@ -9,6 +9,15 @@
     "length": 9
   },
   {
+    "id": "astronaut-si",
+    "domain": "astronaut.si",
+    "price": 3000,
+    "date": "2026-10-19",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
     "id": "fn-si",
     "domain": "fn.si",
     "price": 11124,
