@@ -1,5 +1,68 @@
 [
   {
+    "id": "fractal-si",
+    "domain": "fractal.si",
+    "price": 25000,
+    "date": "2026-10-20",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "game-si",
+    "domain": "game.si",
+    "price": 25000,
+    "date": "2026-10-20",
+    "venue": "Sedo",
+    "category": "Gaming",
+    "length": 4
+  },
+  {
+    "id": "lfg-si",
+    "domain": "lfg.si",
+    "price": 12500,
+    "date": "2026-10-20",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "surplus-si",
+    "domain": "surplus.si",
+    "price": 7495,
+    "date": "2026-10-20",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "middle-si",
+    "domain": "middle.si",
+    "price": 5500,
+    "date": "2026-10-20",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "directors-si",
+    "domain": "directors.si",
+    "price": 5000,
+    "date": "2026-10-20",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "crow-si",
+    "domain": "crow.si",
+    "price": 4995,
+    "date": "2026-10-20",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
     "id": "unreality-si",
     "domain": "unreality.si",
     "price": 5000,
