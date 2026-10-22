@@ -1,5 +1,14 @@
 [
   {
+    "id": "frost-si",
+    "domain": "frost.si",
+    "price": 3000,
+    "date": "2026-10-21",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
     "id": "fractal-si",
     "domain": "fractal.si",
     "price": 25000,
