@@ -81,11 +81,38 @@
     "length": 9
   },
   {
+    "id": "stocks-si",
+    "domain": "stocks.si",
+    "price": 25000,
+    "date": "2026-10-18",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "love-si",
+    "domain": "love.si",
+    "price": 13440,
+    "date": "2026-10-18",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
     "id": "fn-si",
     "domain": "fn.si",
     "price": 11124,
     "date": "2026-10-18",
     "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
+    "id": "rx-si",
+    "domain": "rx.si",
+    "price": 10776,
+    "date": "2026-10-18",
+    "venue": "fruits.co",
     "category": "Short Brandable",
     "length": 2
   },
@@ -99,6 +126,15 @@
     "length": 6
   },
   {
+    "id": "eye-si",
+    "domain": "eye.si",
+    "price": 5376,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
     "id": "timeless-si",
     "domain": "timeless.si",
     "price": 4888,
@@ -106,6 +142,123 @@
     "venue": "Atom.com",
     "category": "Keyword",
     "length": 8
+  },
+  {
+    "id": "mnl-si",
+    "domain": "mnl.si",
+    "price": 4500,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "albert-si",
+    "domain": "albert.si",
+    "price": 3988,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "gab-si",
+    "domain": "gab.si",
+    "price": 3988,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "fraction-si",
+    "domain": "fraction.si",
+    "price": 3500,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "orbital-si",
+    "domain": "orbital.si",
+    "price": 3500,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "bend-si",
+    "domain": "bend.si",
+    "price": 3495,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "dyna-si",
+    "domain": "dyna.si",
+    "price": 3495,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "pact-si",
+    "domain": "pact.si",
+    "price": 3495,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "plank-si",
+    "domain": "plank.si",
+    "price": 3495,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "guidelines-si",
+    "domain": "guidelines.si",
+    "price": 3360,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 10
+  },
+  {
+    "id": "citadel-si",
+    "domain": "citadel.si",
+    "price": 2998,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "blu-si",
+    "domain": "blu.si",
+    "price": 2800,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "qz-si",
+    "domain": "qz.si",
+    "price": 2800,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 2
   },
   {
     "id": "openrouter-si",
