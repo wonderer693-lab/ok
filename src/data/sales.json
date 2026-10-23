@@ -1,5 +1,41 @@
 [
   {
+    "id": "altanta-si",
+    "domain": "altanta.si",
+    "price": 9977,
+    "date": "2026-10-22",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "key-si",
+    "domain": "key.si",
+    "price": 8676,
+    "date": "2026-10-22",
+    "venue": "Fruits.co",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "truth-si",
+    "domain": "truth.si",
+    "price": 8676,
+    "date": "2026-10-22",
+    "venue": "Fruits.co",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "33-si",
+    "domain": "33.si",
+    "price": 8495,
+    "date": "2026-10-22",
+    "venue": "Fruits.co",
+    "category": "Short Brandable",
+    "length": 2
+  },
+  {
     "id": "frost-si",
     "domain": "frost.si",
     "price": 3000,
@@ -1186,15 +1222,6 @@
     "venue": "Private",
     "category": "Keyword",
     "length": 5
-  },
-  {
-    "id": "key-si",
-    "domain": "key.si",
-    "price": 1392,
-    "date": "2026-05-24",
-    "venue": "Private",
-    "category": "Short Brandable",
-    "length": 3
   },
   {
     "id": "kripto-si",
