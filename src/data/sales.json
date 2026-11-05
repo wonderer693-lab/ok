@@ -126,6 +126,24 @@
     "length": 9
   },
   {
+    "id": "lamdba-si",
+    "domain": "lamdba.si",
+    "price": 100000,
+    "date": "2026-10-18",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "life-si",
+    "domain": "life.si",
+    "price": 56000,
+    "date": "2026-10-18",
+    "venue": "fruits.co",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
     "id": "stocks-si",
     "domain": "stocks.si",
     "price": 25000,
@@ -169,6 +187,24 @@
     "venue": "Spaceship",
     "category": "Jobs",
     "length": 6
+  },
+  {
+    "id": "bin-si",
+    "domain": "bin.si",
+    "price": 10000,
+    "date": "2026-10-18",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 3
+  },
+  {
+    "id": "di-si",
+    "domain": "di.si",
+    "price": 9856,
+    "date": "2026-10-18",
+    "venue": "Sedo",
+    "category": "Short Brandable",
+    "length": 2
   },
   {
     "id": "eye-si",
@@ -232,6 +268,24 @@
     "venue": "Private",
     "category": "Keyword",
     "length": 7
+  },
+  {
+    "id": "capsule-si",
+    "domain": "capsule.si",
+    "price": 3500,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "duo-si",
+    "domain": "duo.si",
+    "price": 3498,
+    "date": "2026-10-18",
+    "venue": "Private",
+    "category": "Short Brandable",
+    "length": 3
   },
   {
     "id": "bend-si",
