@@ -135,6 +135,15 @@
     "length": 6
   },
   {
+    "id": "lambda-si",
+    "domain": "lambda.si",
+    "price": 100000,
+    "date": "2026-10-18",
+    "venue": "Atom.com",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
     "id": "life-si",
     "domain": "life.si",
     "price": 56000,
