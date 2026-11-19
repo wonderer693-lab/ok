@@ -1,5 +1,185 @@
 [
   {
+    "id": "biohub-si",
+    "domain": "biohub.si",
+    "price": 20000,
+    "date": "2026-11-15",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "gcsa-si",
+    "domain": "gcsa.si",
+    "price": 20000,
+    "date": "2026-11-15",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "ocket-si",
+    "domain": "ocket.si",
+    "price": 17011,
+    "date": "2026-11-15",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 5
+  },
+  {
+    "id": "pocket-si",
+    "domain": "pocket.si",
+    "price": 17011,
+    "date": "2026-11-15",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "thinkingmachines-si",
+    "domain": "thinkingmachines.si",
+    "price": 15000,
+    "date": "2026-11-15",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 16
+  },
+  {
+    "id": "lightcone-si",
+    "domain": "lightcone.si",
+    "price": 14995,
+    "date": "2026-11-15",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "arrakis-si",
+    "domain": "arrakis.si",
+    "price": 14888,
+    "date": "2026-11-15",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "golden-si",
+    "domain": "golden.si",
+    "price": 13187,
+    "date": "2026-11-15",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "lois-si",
+    "domain": "lois.si",
+    "price": 9950,
+    "date": "2026-11-15",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 4
+  },
+  {
+    "id": "rhythms-si",
+    "domain": "rhythms.si",
+    "price": 9800,
+    "date": "2026-11-15",
+    "venue": "Dynadot",
+    "category": "Keyword",
+    "length": 7
+  },
+  {
+    "id": "onecom-si",
+    "domain": "onecom.si",
+    "price": 9750,
+    "date": "2026-11-15",
+    "venue": "Sedo",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "cardboard-si",
+    "domain": "cardboard.si",
+    "price": 2060,
+    "date": "2026-11-15",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "digitalhuman-si",
+    "domain": "digitalhuman.si",
+    "price": 1975,
+    "date": "2026-11-15",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 12
+  },
+  {
+    "id": "flames-si",
+    "domain": "flames.si",
+    "price": 1925,
+    "date": "2026-11-15",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 6
+  },
+  {
+    "id": "backdoor-si",
+    "domain": "backdoor.si",
+    "price": 1375,
+    "date": "2026-11-15",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "incident-si",
+    "domain": "incident.si",
+    "price": 1375,
+    "date": "2026-11-15",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 8
+  },
+  {
+    "id": "vancouver-si",
+    "domain": "vancouver.si",
+    "price": 1125,
+    "date": "2026-11-15",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "emulation-si",
+    "domain": "emulation.si",
+    "price": 1075,
+    "date": "2026-11-15",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 9
+  },
+  {
+    "id": "transmission-si",
+    "domain": "transmission.si",
+    "price": 1075,
+    "date": "2026-11-15",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 12
+  },
+  {
+    "id": "credential-si",
+    "domain": "credential.si",
+    "price": 1050,
+    "date": "2026-11-15",
+    "venue": "Private",
+    "category": "Keyword",
+    "length": 10
+  },
+  {
     "id": "altanta-si",
     "domain": "altanta.si",
     "price": 9977,
